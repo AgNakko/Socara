@@ -71,12 +71,12 @@ import { company, values, timeline } from '../data/site';
   <Section background="anthracite" paddingY="lg" id="valeurs">
     <div class="grid-12 mb-16">
       <div class="col-span-12 lg:col-span-7">
-        <p class="section-marker text-jaune mb-8" data-reveal>
+        <p class="section-marker text-rouge-clair mb-8" data-reveal>
           <span>04 — Nos valeurs</span>
         </p>
         <h2 class="text-h2 font-display font-extrabold text-blanc mb-6" data-reveal data-reveal-delay="100">
           L'humain et le chantier<br />
-          <span class="text-jaune">au cœur de notre métier.</span>
+          <span class="text-rouge-clair">au cœur de notre métier.</span>
         </h2>
       </div>
       <div class="col-span-12 lg:col-span-4 lg:col-start-9 self-end" data-reveal data-reveal-delay="200">
@@ -90,11 +90,11 @@ import { company, values, timeline } from '../data/site';
       {values.map((v, i) => (
         <li class="bg-anthracite p-8 lg:p-12" data-reveal data-reveal-delay={i * 80}>
           <div class="flex items-start gap-6">
-            <span class="font-display font-extrabold text-jaune text-h3 tabular-nums leading-none shrink-0">0{i + 1}</span>
+            <span class="font-display font-extrabold text-rouge-clair text-h3 tabular-nums leading-none shrink-0">0{i + 1}</span>
             <div>
               <h3 class="font-display font-extrabold text-h4 text-blanc mb-3">{v.title}</h3>
               <p class="text-blanc/80 leading-relaxed mb-4">{v.body}</p>
-              <p class="text-sm italic text-blanc/60 border-l-2 border-jaune pl-4">«&nbsp;{v.quote}&nbsp;»</p>
+              <p class="text-sm italic text-blanc/60 border-l-2 border-rouge-clair pl-4">«&nbsp;{v.quote}&nbsp;»</p>
             </div>
           </div>
         </li>

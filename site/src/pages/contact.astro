@@ -87,7 +87,7 @@ import { company } from '../data/site';
       <!-- Coordonnées + siège -->
       <aside class="col-span-12 lg:col-span-4 lg:col-start-9">
         <div class="bg-anthracite text-blanc p-8 rounded-md sticky top-24" data-reveal data-reveal-delay="300">
-          <p class="section-marker text-jaune mb-8">
+          <p class="section-marker text-rouge-clair mb-8">
             <span>Nous trouver</span>
           </p>
 
@@ -101,10 +101,10 @@ import { company } from '../data/site';
             <div>
               <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-blanc/60 mb-2">Email</dt>
               <dd>
-                <a href={`mailto:${company.email}`} class="text-blanc hover:text-jaune transition-colors">{company.email}</a>
+                <a href={`mailto:${company.email}`} class="text-blanc hover:text-rouge-clair transition-colors">{company.email}</a>
               </dd>
               <dd class="mt-1">
-                <a href={`mailto:${company.recruitmentEmail}`} class="text-blanc/80 hover:text-jaune text-sm transition-colors">{company.recruitmentEmail}</a>
+                <a href={`mailto:${company.recruitmentEmail}`} class="text-blanc/80 hover:text-rouge-clair text-sm transition-colors">{company.recruitmentEmail}</a>
               </dd>
             </div>
 
@@ -112,7 +112,7 @@ import { company } from '../data/site';
               <div>
                 <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-blanc/60 mb-2">Téléphone</dt>
                 <dd>
-                  <a href={`tel:${company.phone}`} class="text-blanc hover:text-jaune transition-colors">{company.phone}</a>
+                  <a href={`tel:${company.phone}`} class="text-blanc hover:text-rouge-clair transition-colors">{company.phone}</a>
                 </dd>
               </div>
             )}

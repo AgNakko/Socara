@@ -52,7 +52,7 @@ import { testimonials, company } from '../data/site';
 
   <!-- Témoignages -->
   <Section background="anthracite" paddingY="lg">
-    <p class="section-marker text-jaune mb-8" data-reveal>
+    <p class="section-marker text-rouge-clair mb-8" data-reveal>
       <span>Témoignages</span>
     </p>
     <h2 class="text-h2 font-display font-extrabold text-blanc mb-16 max-w-3xl" data-reveal data-reveal-delay="100">
@@ -62,7 +62,7 @@ import { testimonials, company } from '../data/site';
     <ul class="grid grid-cols-1 lg:grid-cols-2 gap-8">
       {testimonials.slice(0, 2).map((t) => (
         <li class="bg-anthracite border border-blanc/15 p-10 lg:p-12 rounded-md" data-reveal>
-          <span class="text-jaune font-display text-[3rem] leading-none block mb-4" aria-hidden="true">«</span>
+          <span class="text-rouge-clair font-display text-[3rem] leading-none block mb-4" aria-hidden="true">«</span>
           <blockquote class="font-display font-extrabold text-h4 lg:text-h3 text-blanc leading-tight mb-8">
             {t.quote}
           </blockquote>
@@ -109,7 +109,7 @@ import { testimonials, company } from '../data/site';
   <Section background="rouge" paddingY="lg" id="candidature">
     <div class="grid-12">
       <div class="col-span-12 lg:col-span-5">
-        <p class="section-marker text-jaune mb-8" data-reveal>
+        <p class="section-marker text-rouge-clair mb-8" data-reveal>
           <span>Candidature spontanée</span>
         </p>
         <h2 class="text-h2 font-display font-extrabold text-blanc mb-6" data-reveal data-reveal-delay="100">
@@ -120,11 +120,11 @@ import { testimonials, company } from '../data/site';
         </p>
         <div class="space-y-3 text-blanc/80" data-reveal data-reveal-delay="300">
           <p class="flex items-center gap-3">
-            <span class="text-jaune" aria-hidden="true">→</span>
+            <span class="text-rouge-clair" aria-hidden="true">→</span>
             <a href={`mailto:${company.recruitmentEmail}`} class="hover:text-blanc">{company.recruitmentEmail}</a>
           </p>
           <p class="flex items-center gap-3">
-            <span class="text-jaune" aria-hidden="true">→</span>
+            <span class="text-rouge-clair" aria-hidden="true">→</span>
             <span>Stages et alternances bienvenus chaque année</span>
           </p>
         </div>

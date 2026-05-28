@@ -2,7 +2,7 @@
 interface Props {
   eyebrow: string;
   title: string;
-  /** Optional second-line title rendered in jaune signal. */
+  /** Optional second-line title rendered in red accent. */
   titleHighlight?: string;
   subtitle?: string;
   image?: string;
@@ -19,13 +19,13 @@ const bgClass = {
 }[variant];
 
 const eyebrowClass = {
-  dark:  'text-jaune',
-  red:   'text-jaune',
+  dark:  'text-rouge-clair',
+  red:   'text-blanc/80',
   light: 'text-rouge',
 }[variant];
 
 const titleHighlightClass = {
-  dark:  'text-jaune',
+  dark:  'text-rouge-clair',
   red:   'text-anthracite',
   light: 'text-rouge',
 }[variant];

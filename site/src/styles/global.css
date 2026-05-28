@@ -2,15 +2,15 @@
 
 /* =========================================================
    Design tokens — Brand SOCARA
-   Voir /design/system.md pour la spec complète.
+   Couleurs : rouge + neutres uniquement (pas de jaune)
+   Typo unique : Barlow + Barlow Condensed (Google Fonts)
    ========================================================= */
 @theme {
   /* Brand */
   --color-rouge:        #E30613;
   --color-rouge-fonce:  #B00010;
   --color-rouge-clair:  #F5404E;
-  --color-jaune:        #FFDD00;
-  --color-jaune-dore:   #D4A800;
+  --color-rouge-soft:   #FFF1F2;
 
   /* Neutres */
   --color-anthracite:   #1A1A1A;
@@ -28,9 +28,9 @@
   --color-fg-muted:     #3D3D3A;
   --color-border:       rgba(26, 26, 26, 0.12);
 
-  /* Familles de polices */
-  --font-display:       "Mont", "Barlow Condensed", system-ui, sans-serif;
-  --font-heading:       "Barlow Condensed", "Mont", system-ui, sans-serif;
+  /* Familles de polices — une seule famille, deux graisses fonctionnelles */
+  --font-display:       "Barlow Condensed", system-ui, sans-serif;
+  --font-heading:       "Barlow Condensed", system-ui, sans-serif;
   --font-body:          "Barlow", system-ui, sans-serif;
   --font-label:         "Barlow Condensed", system-ui, sans-serif;
 
@@ -40,31 +40,6 @@
   /* Animations */
   --ease-out-cubic:     cubic-bezier(0.215, 0.610, 0.355, 1.000);
   --ease-out-expo:      cubic-bezier(0.190, 1.000, 0.220, 1.000);
-}
-
-/* =========================================================
-   Polices locales (Mont — licence client) + Google Fonts
-   ========================================================= */
-@font-face {
-  font-family: "Mont";
-  src: url("/fonts/Mont-Heavy.woff2") format("woff2");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Mont";
-  src: url("/fonts/Mont-Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Mont";
-  src: url("/fonts/Mont-Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
 }
 
 /* =========================================================
@@ -95,7 +70,7 @@
   }
 
   body {
-    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.0625rem);
     line-height: 1.65;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -104,26 +79,26 @@
 
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.02;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
     text-wrap: balance;
   }
 
   ::selection {
-    background: var(--color-jaune);
-    color: var(--color-anthracite);
+    background: var(--color-rouge);
+    color: var(--color-blanc);
   }
 
   :focus-visible {
-    outline: 3px solid var(--color-jaune);
+    outline: 2.5px solid var(--color-rouge);
     outline-offset: 3px;
-    border-radius: 2px;
+    border-radius: 3px;
   }
 }
 
 /* =========================================================
-   Typography utilities
+   Typography utilities — échelle resserrée, moins éditorial
    ========================================================= */
 @layer utilities {
   .font-display { font-family: var(--font-display); }
@@ -131,13 +106,14 @@
   .font-body    { font-family: var(--font-body); }
   .font-label   { font-family: var(--font-label); }
 
-  .text-display { font-size: clamp(4rem, 3rem + 5vw, 7.5rem); letter-spacing: -0.035em; line-height: 0.95; }
-  .text-h1      { font-size: clamp(3rem, 2.4rem + 3vw, 5rem); letter-spacing: -0.025em; line-height: 1.02; }
-  .text-h2      { font-size: clamp(2.5rem, 2rem + 2.5vw, 4rem); letter-spacing: -0.02em; line-height: 1.05; }
-  .text-h3      { font-size: clamp(2rem, 1.6rem + 2vw, 3rem); letter-spacing: -0.015em; line-height: 1.1; }
-  .text-h4      { font-size: clamp(1.5rem, 1.3rem + 1vw, 2rem); line-height: 1.2; }
-  .text-lede    { font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem); line-height: 1.55; }
-  .text-eyebrow { font-size: clamp(0.75rem, 0.7rem + 0.3vw, 0.875rem); letter-spacing: 0.15em; text-transform: uppercase; font-family: var(--font-label); font-weight: 600; }
+  /* Échelle plus mesurée — éviter le côté magazine extrême */
+  .text-display { font-size: clamp(3rem, 2.4rem + 3.2vw, 5.5rem); letter-spacing: -0.02em; line-height: 1; }
+  .text-h1      { font-size: clamp(2.5rem, 2rem + 2.5vw, 4rem); letter-spacing: -0.015em; line-height: 1.05; }
+  .text-h2      { font-size: clamp(2rem, 1.6rem + 2vw, 3rem); letter-spacing: -0.01em; line-height: 1.1; }
+  .text-h3      { font-size: clamp(1.625rem, 1.3rem + 1.5vw, 2.25rem); line-height: 1.15; }
+  .text-h4      { font-size: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem); line-height: 1.25; letter-spacing: 0; }
+  .text-lede    { font-size: clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem); line-height: 1.55; font-family: var(--font-body); }
+  .text-eyebrow { font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.8125rem); letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--font-label); font-weight: 600; }
 
   /* Container */
   .container-prose {
@@ -154,15 +130,15 @@
     column-gap: clamp(1rem, 1.5vw, 1.5rem);
   }
 
-  /* Section marker (01 — TITRE) */
+  /* Section marker — sobre, rouge */
   .section-marker {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
     font-family: var(--font-label);
     font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
+    font-weight: 600;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
   }
   .section-marker::after {
@@ -177,8 +153,8 @@
   /* Reveal animation base state */
   [data-reveal] {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+    transform: translateY(20px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
   }
   [data-reveal].is-visible {
     opacity: 1;
