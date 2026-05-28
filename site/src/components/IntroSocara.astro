@@ -1,0 +1,54 @@
+---
+import { company } from '../data/site';
+---
+<section class="bg-blanc" aria-label="Présentation entreprise">
+  <div class="container-prose py-24 lg:py-32">
+    <div class="grid-12 gap-y-10">
+      <!-- Left: visual -->
+      <figure class="col-span-12 lg:col-span-5 lg:col-start-1 self-start" data-reveal>
+        <div class="relative aspect-[4/5] overflow-hidden rounded-md bg-gris-clair">
+          <img
+            src="/img/photos/siege-escalier.jpg"
+            alt="Intérieur du nouveau siège SOCARA à Strasbourg"
+            class="w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption class="mt-3 text-xs text-gris-chaud font-label uppercase tracking-[0.15em]">
+          Le nouveau siège SOCARA · Strasbourg
+        </figcaption>
+      </figure>
+
+      <!-- Right: copy -->
+      <div class="col-span-12 lg:col-span-6 lg:col-start-7">
+        <p class="section-marker text-rouge mb-8" data-reveal>
+          <span>01 — L'Entreprise</span>
+        </p>
+        <h2 class="text-h2 font-display font-extrabold text-anthracite mb-8" data-reveal data-reveal-delay="100">
+          Une entreprise indépendante,<br />
+          ancrée en {company.region}.
+        </h2>
+        <div class="space-y-5 text-anthracite/85 max-w-prose" data-reveal data-reveal-delay="200">
+          <p class="text-lede">
+            Fondée à Strasbourg en {company.founded}, SOCARA est devenue au fil des décennies un acteur reconnu du gros œuvre, puis de l'entreprise générale, sans jamais perdre son âme&nbsp;:
+            celle d'un bâtisseur humain, engagé, rigoureux.
+          </p>
+          <p>
+            Depuis {company.yearsActive} ans, nous traversons les mutations de la ville, des normes, des techniques… et de la société. Toujours en mouvement, mais fidèle à nos fondations.
+            Plus de {company.headcount} collaborateurs, dont une majorité de compagnons fidèles, parfois de père en fils — 20, 30, 40 ans de carrière chez SOCARA.
+          </p>
+        </div>
+
+        <a
+          href="/entreprise"
+          class="mt-10 inline-flex items-center gap-3 font-label uppercase text-sm font-semibold tracking-[0.15em] text-anthracite border-b border-anthracite pb-2 transition-colors hover:text-rouge hover:border-rouge"
+          data-reveal data-reveal-delay="300"
+        >
+          Découvrir notre histoire
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

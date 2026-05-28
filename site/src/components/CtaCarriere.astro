@@ -1,0 +1,57 @@
+---
+import { testimonials } from '../data/site';
+const t = testimonials[0]; // Raphaël
+---
+<section class="bg-rouge text-blanc relative overflow-hidden" aria-label="Rejoindre SOCARA">
+  <!-- Decorative grid pattern -->
+  <div class="absolute inset-0 opacity-10" aria-hidden="true">
+    <div class="absolute inset-0" style="background-image: linear-gradient(to right, rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 80px 80px;"></div>
+  </div>
+
+  <div class="container-prose relative py-24 lg:py-32">
+    <div class="grid-12">
+      <div class="col-span-12 lg:col-span-7">
+        <p class="section-marker text-jaune mb-8" data-reveal>
+          <span>05 — Carrières</span>
+        </p>
+        <h2 class="text-h1 font-display font-extrabold text-blanc mb-8" data-reveal data-reveal-delay="100">
+          Plus qu'un emploi&nbsp;:<br />
+          un métier, une équipe,<br />
+          <span class="text-jaune">une culture.</span>
+        </h2>
+        <p class="text-lede text-blanc/90 mb-10 max-w-2xl" data-reveal data-reveal-delay="200">
+          Nous recrutons peu mais nous recrutons bien. Si vous partagez nos valeurs,
+          parlons-en — votre nom sera connu, votre travail reconnu.
+        </p>
+        <div class="flex flex-wrap gap-3" data-reveal data-reveal-delay="300">
+          <a
+            href="/carrieres#candidature"
+            class="inline-flex items-center gap-3 bg-blanc text-rouge font-label font-semibold uppercase text-sm tracking-[0.15em] px-7 h-14 rounded transition-all hover:bg-jaune hover:text-anthracite"
+          >
+            Candidature spontanée
+            <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href="/carrieres"
+            class="inline-flex items-center gap-3 border border-blanc/60 text-blanc font-label font-semibold uppercase text-sm tracking-[0.15em] px-7 h-14 rounded transition-all hover:bg-blanc hover:text-rouge"
+          >
+            Découvrir notre culture
+          </a>
+        </div>
+      </div>
+
+      <figure class="col-span-12 lg:col-span-4 lg:col-start-9 mt-12 lg:mt-0 self-end" data-reveal data-reveal-delay="400">
+        <blockquote class="font-display font-extrabold text-h4 leading-tight text-blanc">
+          «&nbsp;{t.quote}&nbsp;»
+        </blockquote>
+        <figcaption class="mt-5 flex items-center gap-3">
+          <span class="block w-8 h-px bg-jaune"></span>
+          <div>
+            <p class="font-display font-extrabold text-blanc text-base">{t.author}</p>
+            <p class="font-label uppercase text-[11px] tracking-[0.18em] text-blanc/70">{t.role}</p>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

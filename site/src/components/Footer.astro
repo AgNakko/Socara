@@ -1,0 +1,58 @@
+---
+import { company, navigation } from '../data/site';
+const currentYear = new Date().getFullYear();
+---
+<footer class="bg-anthracite text-blanc">
+  <div class="container-prose py-20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
+      <div class="lg:col-span-5">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="block w-12 h-12 bg-rouge rounded grid place-items-center font-display text-blanc text-2xl font-extrabold">S</span>
+          <span class="font-display text-blanc text-2xl font-extrabold">SOCARA</span>
+        </div>
+        <p class="font-display text-h4 text-blanc font-extrabold leading-tight max-w-md">
+          {company.tagline}.
+        </p>
+        <p class="mt-4 text-blanc/60 max-w-md">
+          Indépendante, ancrée en {company.region}, fondée en {company.founded}.
+          {company.headcount}+ collaborateurs · {company.builtCount} ouvrages livrés.
+        </p>
+      </div>
+
+      <nav class="lg:col-span-3 lg:col-start-7" aria-label="Plan du site">
+        <p class="text-eyebrow text-jaune mb-6">Plan du site</p>
+        <ul class="space-y-3">
+          {navigation.map((item) => (
+            <li>
+              <a href={item.href} class="text-blanc/80 hover:text-blanc transition-colors">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="lg:col-span-3">
+        <p class="text-eyebrow text-jaune mb-6">Contact</p>
+        <address class="not-italic space-y-3 text-blanc/80">
+          <p>{company.address}</p>
+          <p>
+            <a href={`mailto:${company.email}`} class="hover:text-blanc">{company.email}</a>
+          </p>
+          <p>
+            <a href={`mailto:${company.recruitmentEmail}`} class="hover:text-blanc">{company.recruitmentEmail}</a>
+          </p>
+        </address>
+      </div>
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-blanc/15 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm text-blanc/50">
+      <p>© {currentYear} {company.name} — Tous droits réservés.</p>
+      <ul class="flex gap-6">
+        <li><a href="/mentions-legales" class="hover:text-blanc">Mentions légales</a></li>
+        <li><a href="/confidentialite" class="hover:text-blanc">Confidentialité</a></li>
+        <li><a href="/contact" class="hover:text-blanc">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

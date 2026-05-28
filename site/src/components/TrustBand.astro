@@ -1,0 +1,19 @@
+---
+import { partners } from '../data/site';
+---
+<section class="bg-blanc border-y border-[color:var(--color-border)]" aria-label="Maîtres d'ouvrage partenaires">
+  <div class="container-prose py-10 lg:py-14">
+    <p class="text-eyebrow text-gris-chaud text-center mb-8">Ils nous font confiance</p>
+    <div class="flex flex-wrap items-center justify-center gap-10 lg:gap-16 grayscale opacity-70">
+      {partners.map((p) => (
+        <img
+          src={p.logo}
+          alt={p.name}
+          class="h-7 lg:h-9 w-auto object-contain max-w-[140px]"
+          loading="lazy"
+          decoding="async"
+        />
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,79 @@
+---
+import { expertises } from '../data/site';
+
+// Background images per expertise — using siège photos as placeholders
+// TODO : remplacer par photos chantier réelles (gros œuvre, logements, EG)
+const bgs: Record<string, string> = {
+  'gros-oeuvre': '/img/photos/siege-interieur-03.jpg',
+  'logements': '/img/photos/siege-facade-jour.jpg',
+  'entreprise-generale': '/img/photos/siege-interieur-04.jpg',
+};
+---
+<section class="bg-anthracite text-blanc" aria-label="Nos expertises">
+  <div class="container-prose py-24 lg:py-32">
+    <header class="grid-12 mb-16 lg:mb-20">
+      <div class="col-span-12 lg:col-span-8">
+        <p class="section-marker text-jaune mb-8" data-reveal>
+          <span>02 — Nos expertises</span>
+        </p>
+        <h2 class="text-h1 font-display font-extrabold text-blanc mb-6" data-reveal data-reveal-delay="100">
+          Trois métiers,<br />
+          <span class="text-jaune">une seule exigence.</span>
+        </h2>
+        <p class="text-lede text-blanc/75 max-w-3xl" data-reveal data-reveal-delay="200">
+          Du gros œuvre pur jusqu'à la gestion complète d'un chantier en entreprise générale,
+          nos métiers couvrent l'ensemble du processus de construction.
+        </p>
+      </div>
+    </header>
+
+    <ul class="grid grid-cols-1 lg:grid-cols-3 gap-px bg-blanc/15 border border-blanc/15">
+      {expertises.map((exp, i) => (
+        <li class="bg-anthracite group" data-reveal data-reveal-delay={i * 100}>
+          <article class="h-full flex flex-col">
+            <div class="relative aspect-[4/3] overflow-hidden bg-anthracite">
+              <img
+                src={bgs[exp.id]}
+                alt=""
+                class="absolute inset-0 w-full h-full object-cover opacity-65 transition-all duration-700 group-hover:opacity-90 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-anthracite via-anthracite/40 to-transparent"></div>
+              <div class="absolute top-6 left-6 right-6 flex items-start justify-between">
+                <span class="font-display font-extrabold text-[clamp(2.5rem,4vw,3.5rem)] text-blanc/30 leading-none tabular-nums">
+                  {exp.number}
+                </span>
+                <span class="font-label uppercase text-[11px] tracking-[0.2em] text-jaune mt-2">
+                  {exp.tagline}
+                </span>
+              </div>
+              <h3 class="absolute bottom-6 left-6 right-6 font-display font-extrabold text-h3 text-blanc leading-[1.05]">
+                {exp.title}
+              </h3>
+            </div>
+
+            <div class="flex-1 p-8 lg:p-10">
+              <p class="text-blanc/80 leading-relaxed mb-6">{exp.description}</p>
+              <ul class="space-y-2.5 mb-8">
+                {exp.bullets.map((b) => (
+                  <li class="flex items-start gap-3 text-sm text-blanc/70">
+                    <span class="text-rouge mt-1.5 shrink-0" aria-hidden="true">—</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={`/expertises#${exp.id}`}
+                class="inline-flex items-center gap-2 font-label uppercase text-[12px] font-semibold tracking-[0.18em] text-jaune border-b border-jaune/40 pb-1.5 transition-colors hover:border-jaune"
+              >
+                En savoir plus
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

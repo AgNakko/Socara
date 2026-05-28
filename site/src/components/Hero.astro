@@ -1,0 +1,100 @@
+---
+import { company } from '../data/site';
+---
+<section class="relative bg-anthracite text-blanc overflow-hidden" aria-label="Présentation SOCARA">
+  <!-- Background image with subtle parallax -->
+  <div class="absolute inset-0" aria-hidden="true">
+    <img
+      src="/img/photos/siege-facade-nuit.jpg"
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover scale-105"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <!-- Triple gradient: dark left, fade mid, red bottom-right -->
+    <div class="absolute inset-0 bg-gradient-to-br from-anthracite/95 via-anthracite/65 to-rouge/40"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-anthracite/70 via-transparent to-anthracite/20"></div>
+  </div>
+
+  <!-- Container -->
+  <div class="container-prose relative pt-[140px] pb-32 lg:pt-[180px] lg:pb-40 min-h-[88vh] flex flex-col justify-end">
+    <div class="grid-12 items-end">
+      <!-- Left: title & content -->
+      <div class="col-span-12 lg:col-span-8 xl:col-span-9">
+        <p class="section-marker text-jaune mb-8" data-reveal>
+          <span>SOCARA — Depuis {company.founded}</span>
+        </p>
+
+        <h1 class="text-display font-display text-blanc font-extrabold mb-8" data-reveal data-reveal-delay="100">
+          <span class="block">L'art</span>
+          <span class="block">de construire</span>
+          <span class="block text-jaune">la vision de demain.</span>
+        </h1>
+
+        <p class="text-lede text-blanc/85 max-w-2xl mb-10" data-reveal data-reveal-delay="200">
+          Conception, réalisation et livraison de projets de construction en {company.region}.
+          Gros œuvre, entreprise générale, réhabilitation.
+        </p>
+
+        <div class="flex flex-wrap gap-3" data-reveal data-reveal-delay="300">
+          <a
+            href="/entreprise"
+            class="inline-flex items-center gap-3 bg-rouge text-blanc font-label font-semibold uppercase text-sm tracking-[0.15em] px-7 h-14 rounded transition-all hover:bg-rouge-fonce hover:scale-[1.02]"
+          >
+            Découvrir l'entreprise
+            <span aria-hidden="true">→</span>
+          </a>
+          <a
+            href="/realisations"
+            class="inline-flex items-center gap-3 border border-blanc/40 text-blanc font-label font-semibold uppercase text-sm tracking-[0.15em] px-7 h-14 rounded transition-all hover:bg-blanc hover:text-anthracite"
+          >
+            Nos réalisations
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: stats column -->
+      <aside class="col-span-12 lg:col-span-4 xl:col-span-3 lg:pl-8 mt-12 lg:mt-0" data-reveal data-reveal-delay="500">
+        <ul class="grid grid-cols-3 lg:grid-cols-1 gap-0">
+          {[
+            { value: company.yearsActive,  label: 'Années',         suffix: '' },
+            { value: company.builtCount,   label: 'Ouvrages',       suffix: '' },
+            { value: company.headcount,    label: 'Collaborateurs', prefix: '+' },
+          ].map((stat, i) => (
+            <li class={`py-5 lg:py-6 ${i === 0 ? '' : 'lg:border-t border-blanc/15'}`}>
+              <div class="text-right">
+                <p
+                  class="font-display font-extrabold text-blanc text-[clamp(2.5rem,3vw,3.5rem)] leading-none tabular-nums tracking-tight"
+                  data-counter={stat.value}
+                  data-counter-prefix={stat.prefix ?? ''}
+                  data-counter-suffix={stat.suffix ?? ''}
+                >
+                  {stat.prefix ?? ''}{stat.value}
+                </p>
+                <p class="mt-2 font-label uppercase text-[11px] tracking-[0.18em] text-blanc/60">{stat.label}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hidden lg:flex absolute left-[max(2rem,calc((100vw-1440px)/2+2rem))] bottom-10 flex-col items-center gap-3" aria-hidden="true">
+      <span class="font-label uppercase text-[10px] tracking-[0.3em] text-blanc/60 vertical-text" style="writing-mode: vertical-rl; transform: rotate(180deg);">SCROLL</span>
+      <span class="block w-px h-12 bg-jaune origin-top animate-[scroll-line_2s_ease-in-out_infinite]"></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes scroll-line {
+    0%   { transform: scaleY(0); transform-origin: top; }
+    50%  { transform: scaleY(1); transform-origin: top; }
+    51%  { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [class*="animate-["] { animation: none !important; }
+  }
+</style>

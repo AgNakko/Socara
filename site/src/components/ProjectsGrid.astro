@@ -1,0 +1,97 @@
+---
+import { projects } from '../data/site';
+
+// Featured 6 projects on homepage
+const featured = projects.slice(0, 6);
+
+// Cover image mapping (placeholder — siège photos until real ones)
+const covers: Record<string, string> = {
+  'les-deux-rives':         '/img/photos/siege-facade-jour.jpg',
+  'quartier-renaissance':   '/img/photos/siege-facade-nuit.jpg',
+  'natureo':                '/img/photos/siege-interieur-03.jpg',
+  'ile-aux-jardins':        '/img/photos/siege-entree.jpg',
+  'carre-emeraude':         '/img/photos/siege-escalier.jpg',
+  'green-park':             '/img/photos/siege-interieur-04.jpg',
+};
+
+const labelByCategory: Record<string, string> = {
+  'gros-oeuvre':         'Gros œuvre',
+  'entreprise-generale': 'Entreprise générale',
+  'rehabilitation':      'Réhabilitation',
+};
+---
+<section class="bg-ivoire" aria-label="Nos réalisations">
+  <div class="container-prose py-24 lg:py-32">
+    <header class="grid-12 mb-16 lg:mb-20">
+      <div class="col-span-12 lg:col-span-7">
+        <p class="section-marker text-rouge mb-8" data-reveal>
+          <span>03 — Réalisations</span>
+        </p>
+        <h2 class="text-h1 font-display font-extrabold text-anthracite" data-reveal data-reveal-delay="100">
+          L'empreinte du métier,<br />
+          partout en Alsace.
+        </h2>
+      </div>
+      <div class="col-span-12 lg:col-span-4 lg:col-start-9 self-end" data-reveal data-reveal-delay="200">
+        <p class="text-anthracite/75 mb-6">
+          Logements collectifs, écoquartiers, réhabilitations, équipements publics — chaque chantier porte la signature SOCARA.
+        </p>
+        <a
+          href="/realisations"
+          class="inline-flex items-center gap-2 font-label uppercase text-sm font-semibold tracking-[0.15em] text-anthracite border-b border-anthracite pb-1.5 transition-colors hover:text-rouge hover:border-rouge"
+        >
+          Voir toutes les réalisations
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Asymmetric magazine grid -->
+    <ul class="grid grid-cols-12 gap-4 lg:gap-6">
+      {featured.map((p, i) => {
+        // Asymmetric: rotate spans for editorial feel
+        const spans = [
+          'col-span-12 md:col-span-8 row-span-2 aspect-[16/10] md:aspect-[16/12]',
+          'col-span-12 md:col-span-4 aspect-[4/5]',
+          'col-span-6 md:col-span-4 aspect-[4/5]',
+          'col-span-6 md:col-span-4 aspect-square',
+          'col-span-12 md:col-span-7 aspect-[16/9]',
+          'col-span-12 md:col-span-5 aspect-[4/3]',
+        ];
+        return (
+          <li class={spans[i]} data-reveal data-reveal-delay={i * 80}>
+            <a href={`/realisations/${p.slug}`} class="block group relative h-full w-full overflow-hidden rounded-md bg-anthracite">
+              <img
+                src={covers[p.slug] ?? '/img/photos/siege-facade-jour.jpg'}
+                alt={`${p.name} — ${p.location}`}
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                loading="lazy"
+                decoding="async"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-anthracite/90 via-anthracite/30 to-transparent transition-opacity duration-500 group-hover:from-anthracite/95"></div>
+              <div class="relative z-10 h-full p-6 lg:p-8 flex flex-col justify-between text-blanc">
+                <div class="flex items-center gap-2">
+                  <span class="inline-block bg-rouge text-blanc text-[10px] font-label uppercase tracking-[0.15em] font-semibold px-2 py-1 rounded">
+                    {labelByCategory[p.category]}
+                  </span>
+                  <span class="text-[11px] font-label uppercase tracking-[0.15em] text-blanc/70">
+                    {p.year}
+                  </span>
+                </div>
+                <div>
+                  <h3 class="font-display font-extrabold text-h4 lg:text-h3 leading-[1.05] mb-2 text-blanc">
+                    {p.name}
+                  </h3>
+                  <p class="text-sm text-blanc/80">{p.location}</p>
+                  <p class="mt-3 text-[12px] text-blanc/60 font-label uppercase tracking-[0.15em] opacity-0 group-hover:opacity-100 transition-opacity">
+                    {p.moa}
+                  </p>
+                </div>
+              </div>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+</section>

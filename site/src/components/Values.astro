@@ -1,0 +1,65 @@
+---
+import { values, testimonials } from '../data/site';
+
+const t = testimonials[1]; // Frédéric, compagnon coffreur
+---
+<section class="bg-blanc" aria-label="Nos valeurs">
+  <div class="container-prose py-24 lg:py-32">
+    <div class="grid-12 mb-16 lg:mb-24">
+      <div class="col-span-12 lg:col-span-6">
+        <p class="section-marker text-rouge mb-8" data-reveal>
+          <span>04 — Nos valeurs</span>
+        </p>
+        <h2 class="text-h1 font-display font-extrabold text-anthracite" data-reveal data-reveal-delay="100">
+          L'humain et le chantier<br />
+          au cœur de notre métier.
+        </h2>
+      </div>
+      <div class="col-span-12 lg:col-span-5 lg:col-start-8 self-end" data-reveal data-reveal-delay="200">
+        <p class="text-anthracite/75 text-lede">
+          Pas des slogans. Des actes concrets, visibles chaque jour sur nos chantiers,
+          transmis de génération en génération depuis 1973.
+        </p>
+      </div>
+    </div>
+
+    <!-- Quote pulled out -->
+    <figure class="bg-anthracite text-blanc px-8 lg:px-16 py-16 lg:py-24 rounded-md mb-20 lg:mb-28" data-reveal>
+      <blockquote class="font-display font-extrabold text-h3 lg:text-h2 leading-[1.1] text-blanc max-w-4xl">
+        <span class="text-jaune text-[2em] leading-none font-display block mb-2" aria-hidden="true">«</span>
+        {t.quote}
+      </blockquote>
+      <figcaption class="mt-10 flex items-center gap-4">
+        <span class="block w-12 h-px bg-rouge"></span>
+        <div>
+          <p class="font-display font-extrabold text-blanc text-lg">{t.author}</p>
+          <p class="font-label uppercase text-[11px] tracking-[0.2em] text-blanc/60">{t.role}</p>
+        </div>
+      </figcaption>
+    </figure>
+
+    <!-- Values grid -->
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-px bg-[color:var(--color-border)] border border-[color:var(--color-border)] rounded-md overflow-hidden">
+      {values.map((v, i) => (
+        <li class="bg-blanc p-8 lg:p-12" data-reveal data-reveal-delay={i * 80}>
+          <div class="flex items-start gap-6">
+            <span class="font-display font-extrabold text-rouge text-h3 tabular-nums leading-none shrink-0">
+              0{i + 1}
+            </span>
+            <div>
+              <h3 class="font-display font-extrabold text-h4 text-anthracite mb-3">
+                {v.title}
+              </h3>
+              <p class="text-anthracite/80 leading-relaxed mb-4">
+                {v.body}
+              </p>
+              <p class="text-sm italic text-gris-chaud border-l-2 border-rouge pl-4">
+                «&nbsp;{v.quote}&nbsp;»
+              </p>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

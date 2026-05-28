@@ -1,0 +1,43 @@
+---
+import { company, navigation } from '../data/site';
+---
+<header class="sticky top-0 z-40 bg-blanc/85 backdrop-blur border-b border-[color:var(--color-border)]">
+  <div class="container-prose flex items-center justify-between h-[72px]">
+    <a href="/" class="flex items-center gap-3 group" aria-label={`Accueil — ${company.name}`}>
+      <span class="block w-10 h-10 bg-rouge rounded grid place-items-center font-display text-blanc text-xl font-extrabold transition-transform group-hover:scale-105">
+        S
+      </span>
+      <span class="font-display text-anthracite text-lg font-extrabold tracking-tight">SOCARA</span>
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-1" aria-label="Navigation principale">
+      {navigation.map((item) => (
+        <a
+          href={item.href}
+          class="font-label uppercase text-[13px] tracking-[0.12em] text-anthracite px-4 py-2 transition-colors hover:text-rouge"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <a
+      href="/carrieres#candidature"
+      class="hidden sm:inline-flex items-center gap-2 bg-rouge text-blanc font-label uppercase text-[12px] tracking-[0.14em] font-semibold px-5 h-10 rounded transition-colors hover:bg-rouge-fonce"
+    >
+      Candidater
+      <span aria-hidden="true">→</span>
+    </a>
+
+    <button
+      type="button"
+      class="lg:hidden inline-flex flex-col gap-1.5 p-2"
+      aria-label="Ouvrir le menu"
+      data-mobile-menu-toggle
+    >
+      <span class="w-6 h-px bg-anthracite"></span>
+      <span class="w-6 h-px bg-anthracite"></span>
+      <span class="w-6 h-px bg-anthracite"></span>
+    </button>
+  </div>
+</header>
