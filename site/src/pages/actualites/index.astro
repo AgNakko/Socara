@@ -1,0 +1,130 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import { newsItems, newsCategories } from '../../data/site';
+
+const sorted = [...newsItems].sort((a, b) => b.date.localeCompare(a.date));
+const featured = sorted[0];
+const rest = sorted.slice(1);
+
+const labelByCat: Record<string, string> = Object.fromEntries(newsCategories.map((c) => [c.id, c.label]));
+
+const filters = [
+  { id: 'all', label: 'Toutes', count: sorted.length },
+  ...newsCategories.map((c) => ({ id: c.id, label: c.label, count: sorted.filter((n) => n.category === c.id).length })),
+];
+
+function formatDate(iso: string) {
+  const d = new Date(iso);
+  return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+
+<Layout title="Actualités" description="L'actualité SOCARA : vie de l'entreprise et lab chantier — retours techniques, innovations, événements.">
+
+  <PageHero
+    eyebrow="05 — Actualités"
+    title="La vie de l'entreprise,"
+    titleHighlight="et l'innovation terrain."
+    subtitle="Pas de communication marketing — du concret. Les coulisses de nos chantiers, nos retours techniques, nos événements internes."
+    image="/img/photos/siege-interieur-03.jpg"
+    variant="dark"
+  />
+
+  <!-- Featured -->
+  <Section background="blanc" paddingY="lg">
+    <a href={`/actualites/${featured.slug}`} class="group block">
+      <article class="grid-12 gap-y-8 items-center">
+        <figure class="col-span-12 lg:col-span-7 aspect-[16/10] overflow-hidden rounded-md bg-anthracite" data-reveal>
+          <img src={featured.cover} alt={featured.title} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" loading="eager" />
+        </figure>
+        <div class="col-span-12 lg:col-span-4 lg:col-start-9">
+          <p class="section-marker text-rouge mb-6" data-reveal data-reveal-delay="100">
+            <span>À la une — {labelByCat[featured.category]}</span>
+          </p>
+          <h2 class="text-h2 font-display font-extrabold text-anthracite mb-5 leading-tight" data-reveal data-reveal-delay="200">
+            {featured.title}
+          </h2>
+          <p class="text-anthracite/80 mb-6 leading-relaxed" data-reveal data-reveal-delay="300">{featured.excerpt}</p>
+          <p class="flex items-center gap-3 text-sm text-gris-chaud font-label uppercase tracking-[0.15em]" data-reveal data-reveal-delay="400">
+            <time datetime={featured.date}>{formatDate(featured.date)}</time>
+            <span class="opacity-50">·</span>
+            <span>{featured.readingTime} min de lecture</span>
+          </p>
+        </div>
+      </article>
+    </a>
+  </Section>
+
+  <!-- Filtres + grille -->
+  <Section background="ivoire" paddingY="lg">
+    <div class="flex flex-wrap items-center gap-2 mb-12" data-reveal>
+      <span class="font-label uppercase text-[12px] tracking-[0.18em] text-gris-chaud mr-2">Catégorie&nbsp;:</span>
+      {filters.map((f, i) => (
+        <button
+          type="button"
+          data-news-filter={f.id}
+          class:list={[
+            'inline-flex items-center gap-2 px-5 h-11 rounded font-label uppercase text-[12px] font-semibold tracking-[0.15em] border transition-colors',
+            i === 0 ? 'bg-anthracite text-blanc border-anthracite' : 'bg-blanc text-anthracite border-anthracite/20 hover:border-anthracite',
+          ]}
+        >
+          <span>{f.label}</span>
+          <span class="text-[10px] opacity-60 tabular-nums">{f.count}</span>
+        </button>
+      ))}
+    </div>
+
+    <ul id="news-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {rest.map((n, i) => (
+        <li data-news-category={n.category} data-reveal data-reveal-delay={(i % 3) * 80}>
+          <a href={`/actualites/${n.slug}`} class="group block bg-blanc rounded-md overflow-hidden h-full flex flex-col">
+            <figure class="aspect-[16/10] overflow-hidden bg-anthracite">
+              <img src={n.cover} alt={n.title} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" loading="lazy" />
+            </figure>
+            <div class="p-7 flex-1 flex flex-col">
+              <p class="font-label uppercase text-[11px] tracking-[0.18em] text-rouge mb-3">{labelByCat[n.category]}</p>
+              <h3 class="font-display font-extrabold text-h4 text-anthracite mb-3 leading-tight">{n.title}</h3>
+              <p class="text-anthracite/75 text-sm leading-relaxed mb-6 flex-1">{n.excerpt}</p>
+              <div class="flex items-center justify-between text-[11px] font-label uppercase tracking-[0.15em] text-gris-chaud">
+                <time datetime={n.date}>{formatDate(n.date)}</time>
+                <span>{n.readingTime} min</span>
+              </div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <script>
+    document.addEventListener('astro:page-load', initNewsFilters);
+    initNewsFilters();
+
+    function initNewsFilters() {
+      const buttons = document.querySelectorAll<HTMLButtonElement>('[data-news-filter]');
+      const items = document.querySelectorAll<HTMLLIElement>('[data-news-category]');
+      if (!buttons.length) return;
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.newsFilter ?? 'all';
+          buttons.forEach((b) => {
+            const active = b === btn;
+            b.classList.toggle('bg-anthracite', active);
+            b.classList.toggle('text-blanc', active);
+            b.classList.toggle('border-anthracite', active);
+            b.classList.toggle('bg-blanc', !active);
+            b.classList.toggle('text-anthracite', !active);
+            b.classList.toggle('border-anthracite/20', !active);
+          });
+          items.forEach((li) => {
+            const cat = li.dataset.newsCategory;
+            li.style.display = id === 'all' || cat === id ? '' : 'none';
+          });
+        });
+      });
+    }
+  </script>
+
+</Layout>

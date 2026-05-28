@@ -1,0 +1,102 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../components/Section.astro';
+import { newsItems, newsCategories } from '../../data/site';
+
+export async function getStaticPaths() {
+  return newsItems.map((n) => ({ params: { slug: n.slug }, props: { item: n } }));
+}
+
+const { item } = Astro.props;
+const labelByCat: Record<string, string> = Object.fromEntries(newsCategories.map((c) => [c.id, c.label]));
+
+const related = newsItems.filter((n) => n.slug !== item.slug).slice(0, 3);
+
+function formatDate(iso: string) {
+  const d = new Date(iso);
+  return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+
+<Layout title={item.title} description={item.excerpt}>
+
+  <article>
+    <!-- Hero -->
+    <section class="relative bg-anthracite text-blanc overflow-hidden">
+      <div class="absolute inset-0" aria-hidden="true">
+        <img src={item.cover} alt="" class="absolute inset-0 w-full h-full object-cover opacity-50" loading="eager" fetchpriority="high" />
+        <div class="absolute inset-0 bg-gradient-to-t from-anthracite via-anthracite/55 to-anthracite/30"></div>
+      </div>
+
+      <div class="container-prose relative pt-[140px] pb-20 lg:pt-[180px] lg:pb-28 min-h-[62vh] flex flex-col justify-end max-w-4xl">
+        <a href="/actualites" class="inline-flex items-center gap-2 font-label uppercase text-[12px] tracking-[0.2em] text-blanc/70 hover:text-blanc mb-8 self-start">
+          <span aria-hidden="true">←</span>
+          Toutes les actualités
+        </a>
+        <p class="section-marker text-jaune mb-6"><span>{labelByCat[item.category]}</span></p>
+        <h1 class="text-h1 lg:text-h1 font-display font-extrabold mb-6 leading-tight">
+          {item.title}
+        </h1>
+        <p class="flex items-center gap-3 text-sm text-blanc/70 font-label uppercase tracking-[0.15em]">
+          <time datetime={item.date}>{formatDate(item.date)}</time>
+          <span class="opacity-50">·</span>
+          <span>{item.readingTime} min de lecture</span>
+        </p>
+      </div>
+    </section>
+
+    <Section background="blanc" paddingY="lg">
+      <div class="max-w-2xl mx-auto prose-content">
+        <p class="text-lede text-anthracite/85 mb-8">{item.excerpt}</p>
+        <div class="space-y-5 text-anthracite/85 leading-relaxed">
+          <p>
+            Article complet à intégrer depuis WordPress headless en phase 2. Pour l'instant, ce template sert de placeholder
+            structurel — il définit la mise en page éditoriale, la typographie, la hiérarchie des titres et la lecture.
+          </p>
+          <h2 class="text-h3 font-display font-extrabold text-anthracite mt-12 mb-4">Un titre de section</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut leo nec libero ultricies tempus. Cras a viverra magna.
+            Le contenu réel proviendra de l'API REST WordPress et sera mis en forme via les composants Astro de typographie.
+          </p>
+          <blockquote class="border-l-4 border-rouge pl-6 my-8 text-h4 font-display font-extrabold text-anthracite italic">
+            «&nbsp;Une citation marquante du papier, mise en exergue.&nbsp;»
+          </blockquote>
+          <h3 class="text-h4 font-display font-extrabold text-anthracite mt-10 mb-3">Sous-section</h3>
+          <p>
+            La typographie a été pensée pour la lecture longue&nbsp;: line-height généreux, mesure raisonnable (max 65ch),
+            contrastes AAA, focus visibles. Le tout en Barlow pour le corps de texte, Mont pour les titres.
+          </p>
+          <ul class="space-y-2 list-disc pl-6">
+            <li>Listes claires</li>
+            <li>Liens en rouge SOCARA avec underline subtil</li>
+            <li>Images en pleine largeur ou en colonne, au choix</li>
+          </ul>
+        </div>
+      </div>
+    </Section>
+
+    <!-- Related -->
+    <Section background="ivoire" paddingY="lg">
+      <p class="section-marker text-rouge mb-8" data-reveal><span>À lire aussi</span></p>
+      <h2 class="text-h2 font-display font-extrabold text-anthracite mb-12" data-reveal data-reveal-delay="100">D'autres articles SOCARA.</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {related.map((n) => (
+          <li data-reveal>
+            <a href={`/actualites/${n.slug}`} class="group block bg-blanc rounded-md overflow-hidden h-full flex flex-col">
+              <figure class="aspect-[16/10] overflow-hidden bg-anthracite">
+                <img src={n.cover} alt={n.title} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]" loading="lazy" />
+              </figure>
+              <div class="p-6 flex-1 flex flex-col">
+                <p class="font-label uppercase text-[11px] tracking-[0.18em] text-rouge mb-3">{labelByCat[n.category]}</p>
+                <h3 class="font-display font-extrabold text-h4 text-anthracite mb-3 leading-tight">{n.title}</h3>
+                <p class="text-anthracite/75 text-sm flex-1 mb-4">{n.excerpt}</p>
+                <time datetime={n.date} class="text-[11px] font-label uppercase tracking-[0.15em] text-gris-chaud">{formatDate(n.date)}</time>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  </article>
+
+</Layout>

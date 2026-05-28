@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import { expertises } from '../data/site';
+
+const photos: Record<string, string> = {
+  'gros-oeuvre': '/img/photos/siege-interieur-03.jpg',
+  'logements': '/img/photos/siege-facade-jour.jpg',
+  'entreprise-generale': '/img/photos/siege-interieur-04.jpg',
+};
+---
+
+<Layout title="Expertises" description="Trois métiers SOCARA : gros œuvre (cœur historique), construction de logements (principale expertise), entreprise générale (TCE). Plus la réhabilitation comme savoir-faire transverse.">
+
+  <PageHero
+    eyebrow="02 — Expertises"
+    title="Construire, coordonner,"
+    titleHighlight="innover."
+    subtitle="Du gros œuvre pur jusqu'à la gestion complète d'un chantier en entreprise générale, nos métiers couvrent l'ensemble du processus de construction. Avec une approche résolument locale, humaine et performante."
+    image="/img/photos/siege-facade-jour.jpg"
+    variant="dark"
+  />
+
+  <!-- Sommaire / nav rapide -->
+  <Section background="blanc" paddingY="sm">
+    <nav aria-label="Sommaire" class="flex flex-wrap gap-3">
+      {expertises.map((exp) => (
+        <a
+          href={`#${exp.id}`}
+          class="inline-flex items-center gap-2 px-5 h-12 rounded border border-anthracite/20 text-anthracite font-label uppercase text-[12px] font-semibold tracking-[0.15em] transition-colors hover:bg-anthracite hover:text-blanc"
+        >
+          <span class="text-rouge tabular-nums">{exp.number}</span>
+          <span>{exp.title}</span>
+        </a>
+      ))}
+    </nav>
+  </Section>
+
+  <!-- Sections par métier -->
+  {expertises.map((exp, i) => (
+    <section id={exp.id} class={i % 2 === 0 ? 'bg-ivoire' : 'bg-blanc'}>
+      <div class="container-prose py-24 lg:py-32">
+        <div class="grid-12 gap-y-10 items-center">
+          <figure class={`col-span-12 lg:col-span-6 ${i % 2 === 1 ? 'lg:order-2' : ''}`} data-reveal>
+            <div class="aspect-[4/3] overflow-hidden rounded-md bg-gris-clair">
+              <img src={photos[exp.id]} alt={exp.title} class="w-full h-full object-cover" loading="lazy" decoding="async" />
+            </div>
+          </figure>
+
+          <div class={`col-span-12 lg:col-span-5 ${i % 2 === 1 ? 'lg:order-1 lg:col-start-1' : 'lg:col-start-8'}`}>
+            <p class="section-marker text-rouge mb-8" data-reveal>
+              <span>{exp.number} — {exp.tagline}</span>
+            </p>
+            <h2 class="text-h1 font-display font-extrabold text-anthracite mb-6" data-reveal data-reveal-delay="100">
+              {exp.title}
+            </h2>
+            <p class="text-lede text-anthracite/85 mb-8" data-reveal data-reveal-delay="200">
+              {exp.description}
+            </p>
+            <ul class="space-y-3" data-reveal data-reveal-delay="300">
+              {exp.bullets.map((b) => (
+                <li class="flex items-start gap-3 text-anthracite/85">
+                  <span class="text-rouge mt-1.5 shrink-0 font-display font-extrabold" aria-hidden="true">—</span>
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href={`/realisations?filtre=${exp.id}`}
+              class="mt-10 inline-flex items-center gap-3 font-label uppercase text-sm font-semibold tracking-[0.15em] text-anthracite border-b border-anthracite pb-2 transition-colors hover:text-rouge hover:border-rouge"
+              data-reveal data-reveal-delay="400"
+            >
+              Voir nos réalisations en {exp.title.toLowerCase()}
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- Réhabilitation : mention transverse -->
+  <Section background="anthracite" paddingY="lg" id="rehabilitation">
+    <div class="grid-12">
+      <div class="col-span-12 lg:col-span-7">
+        <p class="section-marker text-jaune mb-8" data-reveal>
+          <span>+ — Savoir-faire transverse</span>
+        </p>
+        <h2 class="text-h2 font-display font-extrabold text-blanc mb-6" data-reveal data-reveal-delay="100">
+          Réhabilitation & reconversion urbaine.
+        </h2>
+        <p class="text-lede text-blanc/85 mb-6 max-w-2xl" data-reveal data-reveal-delay="200">
+          SOCARA intervient régulièrement sur des contextes urbains denses, techniques ou occupés&nbsp;:
+          friches industrielles, requalification de quartiers, résidences seniors et étudiantes.
+        </p>
+        <p class="text-blanc/80 max-w-2xl italic" data-reveal data-reveal-delay="300">
+          «&nbsp;Quand la solution n'est pas dans la notice, on l'invente.&nbsp;»
+        </p>
+      </div>
+      <div class="col-span-12 lg:col-span-4 lg:col-start-9 self-end" data-reveal data-reveal-delay="400">
+        <a
+          href="/realisations?filtre=rehabilitation"
+          class="inline-flex items-center gap-3 bg-jaune text-anthracite font-label font-semibold uppercase text-sm tracking-[0.15em] px-7 h-14 rounded transition-colors hover:bg-blanc"
+        >
+          Nos réhabilitations
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Chiffres méthode -->
+  <Section background="blanc" paddingY="md">
+    <div class="grid-12 mb-12">
+      <div class="col-span-12 lg:col-span-7">
+        <p class="section-marker text-rouge mb-8" data-reveal>
+          <span>Méthode</span>
+        </p>
+        <h2 class="text-h2 font-display font-extrabold text-anthracite mb-6" data-reveal data-reveal-delay="100">
+          Un chantier bien préparé est un chantier bien livré.
+        </h2>
+      </div>
+    </div>
+    <dl class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-[color:var(--color-border)] border border-[color:var(--color-border)] rounded-md overflow-hidden">
+      {[
+        { value: 'CCTP', label: 'Analyse en amont, sans concession' },
+        { value: 'TCE', label: 'Coordination tous corps d\'état' },
+        { value: 'BBC · RE2020', label: 'Normes énergétiques intégrées' },
+        { value: 'Zéro réserve', label: 'Notre standard de livraison' },
+      ].map((item) => (
+        <div class="bg-blanc p-8" data-reveal>
+          <dd class="font-display font-extrabold text-anthracite text-h4 leading-tight mb-3">{item.value}</dd>
+          <dt class="font-label uppercase text-[11px] tracking-[0.18em] text-gris-chaud">{item.label}</dt>
+        </div>
+      ))}
+    </dl>
+  </Section>
+
+</Layout>

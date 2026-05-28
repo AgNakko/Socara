@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import { company } from '../data/site';
+---
+
+<Layout title="Contact" description="Contactez SOCARA — entreprise de gros œuvre et entreprise générale à Strasbourg, Alsace.">
+
+  <PageHero
+    eyebrow="06 — Contact"
+    title="Parlons de votre projet."
+    subtitle="Pour un appel d'offres, une candidature, une question — nous sommes à Strasbourg, joignables directement."
+    image="/img/photos/siege-facade-jour.jpg"
+    variant="dark"
+  />
+
+  <Section background="blanc" paddingY="lg">
+    <div class="grid-12 gap-y-12">
+
+      <!-- Formulaire -->
+      <div class="col-span-12 lg:col-span-7">
+        <p class="section-marker text-rouge mb-8" data-reveal>
+          <span>Nous écrire</span>
+        </p>
+        <h2 class="text-h2 font-display font-extrabold text-anthracite mb-10" data-reveal data-reveal-delay="100">
+          Un message, on revient vers vous.
+        </h2>
+
+        <form
+          class="grid grid-cols-1 sm:grid-cols-2 gap-5"
+          action="https://formspree.io/f/REPLACE_ME"
+          method="POST"
+          data-reveal data-reveal-delay="200"
+        >
+          <label class="block">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Prénom *</span>
+            <input type="text" name="prenom" required class="w-full h-12 px-4 border border-anthracite/20 rounded focus:border-rouge focus:outline-none" />
+          </label>
+          <label class="block">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Nom *</span>
+            <input type="text" name="nom" required class="w-full h-12 px-4 border border-anthracite/20 rounded focus:border-rouge focus:outline-none" />
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Email *</span>
+            <input type="email" name="email" required class="w-full h-12 px-4 border border-anthracite/20 rounded focus:border-rouge focus:outline-none" />
+          </label>
+          <label class="block">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Téléphone</span>
+            <input type="tel" name="telephone" class="w-full h-12 px-4 border border-anthracite/20 rounded focus:border-rouge focus:outline-none" />
+          </label>
+          <label class="block">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Société</span>
+            <input type="text" name="societe" class="w-full h-12 px-4 border border-anthracite/20 rounded focus:border-rouge focus:outline-none" />
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Sujet *</span>
+            <select name="sujet" required class="w-full h-12 px-4 border border-anthracite/20 rounded focus:border-rouge focus:outline-none bg-blanc">
+              <option value="">Choisir…</option>
+              <option>Demande de devis / appel d'offres</option>
+              <option>Partenariat MOA / promoteur</option>
+              <option>Candidature spontanée</option>
+              <option>Presse / média</option>
+              <option>Autre</option>
+            </select>
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Message *</span>
+            <textarea name="message" rows="6" required class="w-full px-4 py-3 border border-anthracite/20 rounded focus:border-rouge focus:outline-none resize-y"></textarea>
+          </label>
+
+          <p class="sm:col-span-2 text-xs text-anthracite/60 leading-relaxed">
+            En soumettant ce formulaire, vous acceptez que vos données soient utilisées pour répondre à votre demande.
+            Voir notre <a href="/confidentialite" class="underline">politique de confidentialité</a>.
+          </p>
+
+          <button
+            type="submit"
+            class="sm:col-span-2 inline-flex items-center justify-center gap-3 bg-rouge text-blanc font-label font-semibold uppercase text-sm tracking-[0.15em] px-8 h-14 rounded transition-colors hover:bg-rouge-fonce w-full sm:w-auto"
+          >
+            Envoyer le message
+            <span aria-hidden="true">→</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Coordonnées + siège -->
+      <aside class="col-span-12 lg:col-span-4 lg:col-start-9">
+        <div class="bg-anthracite text-blanc p-8 rounded-md sticky top-24" data-reveal data-reveal-delay="300">
+          <p class="section-marker text-jaune mb-8">
+            <span>Nous trouver</span>
+          </p>
+
+          <dl class="space-y-6">
+            <div>
+              <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-blanc/60 mb-2">Siège social</dt>
+              <dd class="font-display font-extrabold text-blanc text-lg leading-tight">{company.address}</dd>
+              <p class="text-blanc/70 text-sm mt-1">Nouveau siège — Architectes AEA</p>
+            </div>
+
+            <div>
+              <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-blanc/60 mb-2">Email</dt>
+              <dd>
+                <a href={`mailto:${company.email}`} class="text-blanc hover:text-jaune transition-colors">{company.email}</a>
+              </dd>
+              <dd class="mt-1">
+                <a href={`mailto:${company.recruitmentEmail}`} class="text-blanc/80 hover:text-jaune text-sm transition-colors">{company.recruitmentEmail}</a>
+              </dd>
+            </div>
+
+            {company.phone && (
+              <div>
+                <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-blanc/60 mb-2">Téléphone</dt>
+                <dd>
+                  <a href={`tel:${company.phone}`} class="text-blanc hover:text-jaune transition-colors">{company.phone}</a>
+                </dd>
+              </div>
+            )}
+
+            <div>
+              <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-blanc/60 mb-2">Zone d'intervention</dt>
+              <dd class="text-blanc/85">Alsace — Bas-Rhin & Haut-Rhin</dd>
+            </div>
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </Section>
+
+  <!-- Plan / siège photo -->
+  <Section background="ivoire" paddingY="lg">
+    <div class="grid-12 mb-10">
+      <div class="col-span-12 lg:col-span-7">
+        <p class="section-marker text-rouge mb-8" data-reveal>
+          <span>Le siège</span>
+        </p>
+        <h2 class="text-h2 font-display font-extrabold text-anthracite mb-6" data-reveal data-reveal-delay="100">
+          Une maison de bâtisseurs.
+        </h2>
+        <p class="text-lede text-anthracite/75 max-w-2xl" data-reveal data-reveal-delay="200">
+          Notre nouveau siège à Strasbourg incarne notre identité industrielle. Conçu avec AEA Architectes,
+          il accueille toutes nos équipes — administration, conducteurs de travaux, métreurs, RH.
+        </p>
+      </div>
+    </div>
+    <div class="grid grid-cols-12 gap-4 lg:gap-6">
+      <figure class="col-span-12 lg:col-span-8 aspect-[16/10] overflow-hidden rounded-md bg-anthracite" data-reveal>
+        <img src="/img/photos/siege-facade-nuit.jpg" alt="Façade du siège SOCARA au crépuscule" class="w-full h-full object-cover" loading="lazy" />
+      </figure>
+      <figure class="col-span-6 lg:col-span-4 aspect-square overflow-hidden rounded-md bg-anthracite" data-reveal data-reveal-delay="100">
+        <img src="/img/photos/siege-entree.jpg" alt="Entrée du siège, claustra bois" class="w-full h-full object-cover" loading="lazy" />
+      </figure>
+      <figure class="col-span-6 lg:col-span-4 aspect-square overflow-hidden rounded-md bg-anthracite" data-reveal data-reveal-delay="200">
+        <img src="/img/photos/siege-escalier.jpg" alt="Escalier intérieur" class="w-full h-full object-cover" loading="lazy" />
+      </figure>
+      <figure class="col-span-12 lg:col-span-8 aspect-[16/9] overflow-hidden rounded-md bg-anthracite" data-reveal data-reveal-delay="300">
+        <img src="/img/photos/siege-interieur-04.jpg" alt="Étage de bureaux" class="w-full h-full object-cover" loading="lazy" />
+      </figure>
+    </div>
+  </Section>
+
+</Layout>

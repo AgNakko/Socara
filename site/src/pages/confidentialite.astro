@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import { company } from '../data/site';
+---
+
+<Layout title="Confidentialité" description={`Politique de confidentialité de ${company.name}.`}>
+  <PageHero eyebrow="Légal" title="Politique de confidentialité" variant="light" />
+
+  <Section background="blanc" paddingY="lg">
+    <div class="max-w-2xl mx-auto space-y-10 text-anthracite/85">
+
+      <div>
+        <h2 class="font-display font-extrabold text-h4 text-anthracite mb-3">Données collectées</h2>
+        <p>
+          Lorsque vous remplissez un formulaire (contact, candidature spontanée), {company.name} collecte&nbsp;:
+          nom, prénom, email, téléphone, message, et, le cas échéant, votre CV.
+        </p>
+        <p class="mt-3">
+          Aucune donnée n'est collectée à votre insu. Le site n'utilise pas de cookies de tracking publicitaire.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display font-extrabold text-h4 text-anthracite mb-3">Finalité</h2>
+        <p>
+          Vos données sont utilisées uniquement pour répondre à votre demande, traiter votre candidature,
+          ou vous recontacter dans le cadre d'un échange professionnel. Elles ne sont jamais cédées à des tiers.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display font-extrabold text-h4 text-anthracite mb-3">Conservation</h2>
+        <p>
+          Les candidatures spontanées sont conservées 2 ans maximum (durée légale recommandée par la CNIL),
+          les messages de contact 3 ans à compter du dernier échange.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display font-extrabold text-h4 text-anthracite mb-3">Vos droits</h2>
+        <p>
+          Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition
+          sur vos données. Pour exercer ces droits, contactez&nbsp;:
+          <a href={`mailto:${company.email}`} class="underline text-rouge">{company.email}</a>.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display font-extrabold text-h4 text-anthracite mb-3">Cookies</h2>
+        <p>
+          Le site SOCARA utilise uniquement des cookies techniques nécessaires à son fonctionnement (préférences
+          d'affichage). Aucun cookie publicitaire, aucun tracker tiers.
+        </p>
+      </div>
+
+    </div>
+  </Section>
+</Layout>

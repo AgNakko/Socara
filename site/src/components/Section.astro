@@ -1,0 +1,28 @@
+---
+interface Props {
+  background?: 'blanc' | 'ivoire' | 'gris-clair' | 'anthracite' | 'rouge';
+  paddingY?: 'sm' | 'md' | 'lg';
+  id?: string;
+  class?: string;
+}
+
+const { background = 'blanc', paddingY = 'lg', id, class: classProp = '' } = Astro.props;
+
+const bgMap = {
+  'blanc':      'bg-blanc text-anthracite',
+  'ivoire':     'bg-ivoire text-anthracite',
+  'gris-clair': 'bg-gris-clair text-anthracite',
+  'anthracite': 'bg-anthracite text-blanc',
+  'rouge':      'bg-rouge text-blanc',
+};
+const padMap = {
+  sm: 'py-16 lg:py-20',
+  md: 'py-20 lg:py-24',
+  lg: 'py-24 lg:py-32',
+};
+---
+<section id={id} class:list={[bgMap[background], padMap[paddingY], classProp]}>
+  <div class="container-prose">
+    <slot />
+  </div>
+</section>

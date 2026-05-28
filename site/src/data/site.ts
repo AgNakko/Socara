@@ -256,6 +256,81 @@ export const testimonials = [
     quote:
       "Nous savons que le chantier sera mené dans les délais et avec un haut niveau d'exigence. SOCARA est un partenaire fiable.",
     author: 'Promoteur privé',
-    role: 'Maîtrise d\'ouvrage, Strasbourg',
+    role: "Maîtrise d'ouvrage, Strasbourg",
   },
+];
+
+export const timeline = [
+  { year: '1973', title: 'Fondation', body: "Création de SOCARA à Strasbourg, à partir d'une entreprise de carrelage et de crépissage. L'ancrage terrain s'enracine." },
+  { year: '1980', title: 'Premiers immeubles collectifs', body: "L'entreprise se spécialise dans la construction d'immeubles de logements collectifs en Alsace." },
+  { year: '1989', title: 'Futura 2000, Schiltigheim', body: 'Une opération marquante qui valide notre savoir-faire en logement collectif moderne.' },
+  { year: '1991', title: 'Tribunal d\'instances de Strasbourg', body: 'Première grue à tour en chantier — un cap technique franchi.' },
+  { year: '1996', title: 'La décoffreuse SOCARA brevetée', body: 'Un outil développé en interne, breveté. Marque de fabrique : la R&D sur le terrain.' },
+  { year: '2010', title: 'Le Schulmeister', body: 'Chantier de référence pour CUS Habitat, début d\'une décennie d\'expansion sur les grands programmes alsaciens.' },
+  { year: '2012', title: 'Les Deux Rives, Strasbourg', body: '380 logements, 7 îlots. Chantier complexe en zone urbaine, vitrine de notre maîtrise du phasage.' },
+  { year: '2013', title: 'Natureo, écoquartier des Tanneries', body: 'Projet labellisé écoquartier. SOCARA intègre les exigences BBC et la gestion fine des nuisances.' },
+  { year: '2024', title: 'Nouveau siège, Strasbourg', body: 'Emménagement dans un siège conçu par AEA Architectes — un signal fort de notre identité industrielle.' },
+  { year: '2026', title: '+50 ans, +994 ouvrages', body: "150 collaborateurs, indépendance préservée, transmission active. L'aventure continue." },
+];
+
+export const newsItems = [
+  {
+    slug: 'inauguration-nouveau-siege',
+    title: 'Inauguration du nouveau siège SOCARA',
+    excerpt: "Après plus de deux ans de travaux, notre nouveau siège ouvre ses portes à Strasbourg. Conçu par AEA Architectes, il incarne notre identité industrielle.",
+    category: 'vie-entreprise',
+    date: '2024-09-15',
+    cover: '/img/photos/siege-facade-nuit.jpg',
+    readingTime: 4,
+  },
+  {
+    slug: 'rentree-alternance-2025',
+    title: 'Rentrée 2025 : 12 nouveaux apprentis et alternants',
+    excerpt: 'Comme chaque année, SOCARA accueille des jeunes en formation — CAP, bac pro, BTS, école d\'ingénieur. Bienvenue à la nouvelle promotion.',
+    category: 'vie-entreprise',
+    date: '2025-09-02',
+    cover: '/img/photos/siege-entree.jpg',
+    readingTime: 3,
+  },
+  {
+    slug: 'banche-securite-integree',
+    title: 'Banches à sécurité intégrée : retour sur 30 ans d\'innovation chantier',
+    excerpt: 'Depuis les années 1990, SOCARA développe ses propres outils de chantier. Petit retour sur la banche à sécurité intégrée, devenue standard interne.',
+    category: 'lab-chantier',
+    date: '2025-06-10',
+    cover: '/img/photos/siege-interieur-03.jpg',
+    readingTime: 6,
+  },
+  {
+    slug: 'phasage-deux-rives',
+    title: 'Comment nous avons phasé Les Deux Rives — 380 logements en 7 îlots',
+    excerpt: 'Retour technique sur un de nos chantiers les plus emblématiques : organisation, coactivité, gestion des risques, leçons retenues.',
+    category: 'lab-chantier',
+    date: '2025-04-22',
+    cover: '/img/photos/siege-facade-jour.jpg',
+    readingTime: 8,
+  },
+  {
+    slug: 'chantier-zero-reserve',
+    title: 'La culture du « chantier zéro réserve » chez SOCARA',
+    excerpt: 'Notre standard interne : livrer sans réserve. Comment on s\'y prend, méthodiquement, depuis l\'analyse du CCTP jusqu\'à la réception.',
+    category: 'lab-chantier',
+    date: '2025-02-08',
+    cover: '/img/photos/siege-escalier.jpg',
+    readingTime: 7,
+  },
+  {
+    slug: 'partenariat-cfa-btp',
+    title: 'Partenariat renforcé avec le CFA BTP d\'Alsace',
+    excerpt: 'Formation par alternance, tutorat, journées portes ouvertes — la transmission est notre engagement le plus durable.',
+    category: 'vie-entreprise',
+    date: '2024-11-04',
+    cover: '/img/photos/siege-interieur-04.jpg',
+    readingTime: 3,
+  },
+];
+
+export const newsCategories = [
+  { id: 'vie-entreprise', label: "Vie de l'entreprise" },
+  { id: 'lab-chantier',   label: 'Lab chantier' },
 ];

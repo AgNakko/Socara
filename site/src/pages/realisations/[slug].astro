@@ -1,0 +1,172 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Section from '../../components/Section.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/site';
+
+export async function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+
+const covers: Record<string, string> = {
+  'les-deux-rives':         '/img/photos/siege-facade-jour.jpg',
+  'quartier-renaissance':   '/img/photos/siege-facade-nuit.jpg',
+  'natureo':                '/img/photos/siege-interieur-03.jpg',
+  'ile-aux-jardins':        '/img/photos/siege-entree.jpg',
+  'carre-emeraude':         '/img/photos/siege-escalier.jpg',
+  'green-park':             '/img/photos/siege-interieur-04.jpg',
+};
+const cover = covers[project.slug] ?? '/img/photos/siege-facade-jour.jpg';
+
+const labelByCategory: Record<string, string> = {
+  'gros-oeuvre':         'Gros œuvre',
+  'entreprise-generale': 'Entreprise générale',
+  'rehabilitation':      'Réhabilitation',
+};
+
+// Related projects (3 other in same category, then in same type)
+const related = projects
+  .filter((p) => p.slug !== project.slug)
+  .sort((a, b) => {
+    const sameCatA = a.category === project.category ? 0 : 1;
+    const sameCatB = b.category === project.category ? 0 : 1;
+    return sameCatA - sameCatB;
+  })
+  .slice(0, 3);
+---
+
+<Layout title={project.name} description={`${project.name} — ${project.location} · ${labelByCategory[project.category]} · ${project.year}`}>
+
+  <!-- Hero photo -->
+  <section class="relative bg-anthracite text-blanc overflow-hidden">
+    <div class="absolute inset-0" aria-hidden="true">
+      <img src={cover} alt="" class="absolute inset-0 w-full h-full object-cover opacity-65" loading="eager" fetchpriority="high" />
+      <div class="absolute inset-0 bg-gradient-to-t from-anthracite via-anthracite/40 to-anthracite/30"></div>
+    </div>
+
+    <div class="container-prose relative pt-[140px] pb-20 lg:pt-[180px] lg:pb-28 min-h-[72vh] flex flex-col justify-end">
+      <a href="/realisations" class="inline-flex items-center gap-2 font-label uppercase text-[12px] tracking-[0.2em] text-blanc/70 hover:text-blanc mb-8 self-start" data-reveal>
+        <span aria-hidden="true">←</span>
+        Retour aux réalisations
+      </a>
+      <p class="section-marker text-jaune mb-6" data-reveal data-reveal-delay="100">
+        <span>{labelByCategory[project.category]} · {project.year}</span>
+      </p>
+      <h1 class="text-h1 lg:text-display font-display font-extrabold mb-6" data-reveal data-reveal-delay="200">
+        {project.name}
+      </h1>
+      <p class="text-lede text-blanc/85" data-reveal data-reveal-delay="300">{project.location}</p>
+    </div>
+  </section>
+
+  <!-- Détails projet -->
+  <Section background="blanc" paddingY="lg">
+    <div class="grid-12 gap-y-12">
+      <div class="col-span-12 lg:col-span-7">
+        <p class="section-marker text-rouge mb-8" data-reveal>
+          <span>Le projet</span>
+        </p>
+        <h2 class="text-h2 font-display font-extrabold text-anthracite mb-6" data-reveal data-reveal-delay="100">
+          {project.count ? project.count : `Un chantier ${labelByCategory[project.category].toLowerCase()} en Alsace.`}
+        </h2>
+        {project.description && (
+          <div class="space-y-5 text-anthracite/85 max-w-prose" data-reveal data-reveal-delay="200">
+            <p class="text-lede">{project.description}</p>
+            <p>
+              Comme sur tous nos chantiers, l'opération a été menée avec une préparation rigoureuse, un pilotage technique et humain au quotidien, et un service SAV réactif après la livraison.
+            </p>
+          </div>
+        )}
+      </div>
+
+      <aside class="col-span-12 lg:col-span-4 lg:col-start-9">
+        <div class="bg-ivoire p-8 rounded-md" data-reveal>
+          <dl class="space-y-5">
+            <div>
+              <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-gris-chaud mb-1">Localisation</dt>
+              <dd class="font-display font-extrabold text-anthracite text-lg">{project.location}</dd>
+            </div>
+            <div>
+              <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-gris-chaud mb-1">Mission</dt>
+              <dd class="font-display font-extrabold text-anthracite text-lg">{labelByCategory[project.category]}</dd>
+            </div>
+            <div>
+              <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-gris-chaud mb-1">Maîtrise d'ouvrage</dt>
+              <dd class="font-display font-extrabold text-anthracite text-lg">{project.moa}</dd>
+            </div>
+            {project.architect && (
+              <div>
+                <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-gris-chaud mb-1">Architecte</dt>
+                <dd class="font-display font-extrabold text-anthracite text-lg">{project.architect}</dd>
+              </div>
+            )}
+            <div>
+              <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-gris-chaud mb-1">Livraison</dt>
+              <dd class="font-display font-extrabold text-anthracite text-lg">{project.year}</dd>
+            </div>
+            {project.count && (
+              <div>
+                <dt class="font-label uppercase text-[11px] tracking-[0.2em] text-gris-chaud mb-1">Programme</dt>
+                <dd class="font-display font-extrabold text-anthracite text-lg">{project.count}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </Section>
+
+  <!-- Galerie placeholder -->
+  <Section background="ivoire" paddingY="lg">
+    <p class="section-marker text-rouge mb-8" data-reveal>
+      <span>Galerie</span>
+    </p>
+    <h2 class="text-h3 font-display font-extrabold text-anthracite mb-12" data-reveal data-reveal-delay="100">
+      Le chantier en images.
+    </h2>
+    <div class="grid grid-cols-12 gap-4 lg:gap-6">
+      <figure class="col-span-12 lg:col-span-8 aspect-[16/10] overflow-hidden rounded-md bg-anthracite" data-reveal>
+        <img src={cover} alt={project.name} class="w-full h-full object-cover" loading="lazy" />
+      </figure>
+      <figure class="col-span-6 lg:col-span-4 aspect-square overflow-hidden rounded-md bg-anthracite" data-reveal data-reveal-delay="100">
+        <img src="/img/photos/siege-escalier.jpg" alt="" class="w-full h-full object-cover" loading="lazy" />
+      </figure>
+      <figure class="col-span-6 lg:col-span-4 aspect-square overflow-hidden rounded-md bg-anthracite" data-reveal data-reveal-delay="200">
+        <img src="/img/photos/siege-entree.jpg" alt="" class="w-full h-full object-cover" loading="lazy" />
+      </figure>
+      <figure class="col-span-12 lg:col-span-8 aspect-[16/9] overflow-hidden rounded-md bg-anthracite" data-reveal data-reveal-delay="300">
+        <img src="/img/photos/siege-interieur-04.jpg" alt="" class="w-full h-full object-cover" loading="lazy" />
+      </figure>
+    </div>
+    <p class="mt-6 text-sm text-gris-chaud font-label uppercase tracking-[0.15em]">
+      Galerie réelle à intégrer depuis l'archive photos SOCARA.
+    </p>
+  </Section>
+
+  <!-- Related projects -->
+  <Section background="blanc" paddingY="lg">
+    <div class="flex items-end justify-between flex-wrap gap-6 mb-12">
+      <div>
+        <p class="section-marker text-rouge mb-6" data-reveal>
+          <span>Suite</span>
+        </p>
+        <h2 class="text-h2 font-display font-extrabold text-anthracite" data-reveal data-reveal-delay="100">
+          Autres réalisations.
+        </h2>
+      </div>
+      <a href="/realisations" class="font-label uppercase text-sm font-semibold tracking-[0.15em] text-anthracite border-b border-anthracite pb-1.5 transition-colors hover:text-rouge hover:border-rouge">
+        Voir toutes nos réalisations →
+      </a>
+    </div>
+    <ul class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {related.map((p) => (
+        <li>
+          <ProjectCard project={p} cover={covers[p.slug]} aspect="portrait" />
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+</Layout>

@@ -1,0 +1,195 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import { testimonials, company } from '../data/site';
+---
+
+<Layout title="Carrières" description="Rejoindre SOCARA, c'est plus qu'un emploi. Découvrez notre culture d'entreprise, nos engagements RH et envoyez-nous votre candidature spontanée.">
+
+  <PageHero
+    eyebrow="04 — Carrières"
+    title="Plus qu'un emploi :"
+    titleHighlight="un métier, une équipe, une culture."
+    subtitle="Depuis 1973, nous avons formé, accompagné, fait évoluer des centaines de collaborateurs. Beaucoup sont restés — certains ont fait toute leur carrière ici. Parce que construire, chez SOCARA, c'est aussi bâtir les parcours."
+    image="/img/photos/siege-entree.jpg"
+    variant="dark"
+  />
+
+  <!-- Notre culture -->
+  <Section background="blanc" paddingY="lg">
+    <div class="grid-12 mb-16">
+      <div class="col-span-12 lg:col-span-6">
+        <p class="section-marker text-rouge mb-8" data-reveal>
+          <span>Notre culture</span>
+        </p>
+        <h2 class="text-h2 font-display font-extrabold text-anthracite mb-6" data-reveal data-reveal-delay="100">
+          Votre nom est connu,<br />votre travail est reconnu.
+        </h2>
+      </div>
+      <div class="col-span-12 lg:col-span-5 lg:col-start-8 self-end" data-reveal data-reveal-delay="200">
+        <p class="text-lede text-anthracite/75">
+          Nous recrutons peu — un faible turnover, beaucoup de recommandations internes. Mais nous recrutons bien&nbsp;: pour bâtir un parcours, pas remplir une case.
+        </p>
+      </div>
+    </div>
+
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {[
+        { num: '01', title: 'Une entreprise à taille humaine', body: 'Circuits courts, échanges directs. Vous êtes en lien direct avec votre chef, votre conducteur, votre direction.' },
+        { num: '02', title: 'Une vraie culture du terrain', body: 'Le chantier est le cœur. On s\'y forme, on y progresse, on y apprend vite. Le savoir-faire est précieux ; le transmettre est essentiel.' },
+        { num: '03', title: 'Des parcours qui évoluent', body: 'Conducteur devenu chef de groupe, compagnon devenu formateur — nos exemples sont nombreux. La promotion interne est notre voie privilégiée.' },
+        { num: '04', title: 'Une ambiance unique', body: 'Repas de fin de chantier, entraide, solidarité, humour. L\'humain est central, toujours.' },
+      ].map((item) => (
+        <li class="bg-ivoire p-8 rounded-md" data-reveal>
+          <span class="font-display font-extrabold text-rouge text-h4 tabular-nums leading-none block mb-4">{item.num}</span>
+          <h3 class="font-display font-extrabold text-h4 text-anthracite mb-3 leading-tight">{item.title}</h3>
+          <p class="text-anthracite/75 text-sm leading-relaxed">{item.body}</p>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- Témoignages -->
+  <Section background="anthracite" paddingY="lg">
+    <p class="section-marker text-jaune mb-8" data-reveal>
+      <span>Témoignages</span>
+    </p>
+    <h2 class="text-h2 font-display font-extrabold text-blanc mb-16 max-w-3xl" data-reveal data-reveal-delay="100">
+      Ce que disent celles et ceux qui sont passés par ici.
+    </h2>
+
+    <ul class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      {testimonials.slice(0, 2).map((t) => (
+        <li class="bg-anthracite border border-blanc/15 p-10 lg:p-12 rounded-md" data-reveal>
+          <span class="text-jaune font-display text-[3rem] leading-none block mb-4" aria-hidden="true">«</span>
+          <blockquote class="font-display font-extrabold text-h4 lg:text-h3 text-blanc leading-tight mb-8">
+            {t.quote}
+          </blockquote>
+          <figcaption class="flex items-center gap-4">
+            <span class="block w-10 h-px bg-rouge"></span>
+            <div>
+              <p class="font-display font-extrabold text-blanc">{t.author}</p>
+              <p class="font-label uppercase text-[11px] tracking-[0.2em] text-blanc/60 mt-1">{t.role}</p>
+            </div>
+          </figcaption>
+        </li>
+      ))}
+    </ul>
+  </Section>
+
+  <!-- Engagements RH -->
+  <Section background="blanc" paddingY="lg">
+    <div class="grid-12">
+      <div class="col-span-12 lg:col-span-7">
+        <p class="section-marker text-rouge mb-8" data-reveal>
+          <span>Engagements RH</span>
+        </p>
+        <h2 class="text-h2 font-display font-extrabold text-anthracite mb-12" data-reveal data-reveal-delay="100">
+          Nos engagements, pas des promesses.
+        </h2>
+        <ul class="space-y-6">
+          {[
+            { title: 'Formation continue', body: 'Tutorat, alternance, montée en compétence permanente. La formation ne s\'arrête pas à l\'embauche.' },
+            { title: 'Sécurité renforcée', body: 'Visites régulières, plateformes sécurisées, équipements adaptés. La sécurité n\'est jamais une variable d\'ajustement.' },
+            { title: 'Accompagnement social', body: 'Mobilité, santé, logement — quand c\'est nécessaire, on est là. Discrètement, efficacement.' },
+            { title: 'Apprentissage & alternance', body: 'Chaque année, nous accueillons des stagiaires, apprentis, alternants — du CAP au bac+5. La transmission est notre engagement le plus durable.' },
+          ].map((eng) => (
+            <li class="border-l-2 border-rouge pl-6 lg:pl-8 py-2" data-reveal>
+              <h3 class="font-display font-extrabold text-h4 text-anthracite mb-2">{eng.title}</h3>
+              <p class="text-anthracite/75 max-w-2xl">{eng.body}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Formulaire candidature spontanée -->
+  <Section background="rouge" paddingY="lg" id="candidature">
+    <div class="grid-12">
+      <div class="col-span-12 lg:col-span-5">
+        <p class="section-marker text-jaune mb-8" data-reveal>
+          <span>Candidature spontanée</span>
+        </p>
+        <h2 class="text-h2 font-display font-extrabold text-blanc mb-6" data-reveal data-reveal-delay="100">
+          Envie de nous rejoindre&nbsp;?
+        </h2>
+        <p class="text-lede text-blanc/90 mb-8" data-reveal data-reveal-delay="200">
+          Vous avez l'envie, la rigueur, l'esprit d'équipe ? Nous avons le chantier. Envoyez-nous votre candidature — CV accompagné d'une lettre ou d'une courte vidéo.
+        </p>
+        <div class="space-y-3 text-blanc/80" data-reveal data-reveal-delay="300">
+          <p class="flex items-center gap-3">
+            <span class="text-jaune" aria-hidden="true">→</span>
+            <a href={`mailto:${company.recruitmentEmail}`} class="hover:text-blanc">{company.recruitmentEmail}</a>
+          </p>
+          <p class="flex items-center gap-3">
+            <span class="text-jaune" aria-hidden="true">→</span>
+            <span>Stages et alternances bienvenus chaque année</span>
+          </p>
+        </div>
+      </div>
+
+      <form
+        class="col-span-12 lg:col-span-6 lg:col-start-7 bg-blanc text-anthracite p-8 lg:p-10 rounded-md"
+        action="https://formspree.io/f/REPLACE_ME"
+        method="POST"
+        data-reveal
+        data-reveal-delay="400"
+      >
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <label class="block">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Prénom *</span>
+            <input type="text" name="prenom" required class="w-full h-12 px-4 border border-anthracite/20 rounded focus:border-rouge focus:outline-none" />
+          </label>
+          <label class="block">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Nom *</span>
+            <input type="text" name="nom" required class="w-full h-12 px-4 border border-anthracite/20 rounded focus:border-rouge focus:outline-none" />
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Email *</span>
+            <input type="email" name="email" required class="w-full h-12 px-4 border border-anthracite/20 rounded focus:border-rouge focus:outline-none" />
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Téléphone</span>
+            <input type="tel" name="telephone" class="w-full h-12 px-4 border border-anthracite/20 rounded focus:border-rouge focus:outline-none" />
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Vous postulez en tant que *</span>
+            <select name="profil" required class="w-full h-12 px-4 border border-anthracite/20 rounded focus:border-rouge focus:outline-none bg-blanc">
+              <option value="">Choisir…</option>
+              <option>Compagnon (coffreur, ferrailleur, maçon, grutier…)</option>
+              <option>Chef de chantier</option>
+              <option>Conducteur de travaux</option>
+              <option>Métreur — économiste</option>
+              <option>Fonction support (admin, RH, secrétariat technique)</option>
+              <option>Stage / alternance</option>
+              <option>Autre</option>
+            </select>
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">Votre message</span>
+            <textarea name="message" rows="4" class="w-full px-4 py-3 border border-anthracite/20 rounded focus:border-rouge focus:outline-none resize-y"></textarea>
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="block font-label uppercase text-[12px] tracking-[0.15em] text-anthracite mb-2">CV (PDF, max 10 Mo) *</span>
+            <input type="file" name="cv" accept="application/pdf" required class="w-full text-sm" />
+          </label>
+        </div>
+
+        <p class="mt-6 text-xs text-anthracite/60 leading-relaxed">
+          En soumettant ce formulaire, vous acceptez que vos données soient utilisées dans le cadre du traitement de votre candidature. Voir notre <a href="/confidentialite" class="underline">politique de confidentialité</a>.
+        </p>
+
+        <button
+          type="submit"
+          class="mt-8 inline-flex items-center gap-3 bg-rouge text-blanc font-label font-semibold uppercase text-sm tracking-[0.15em] px-8 h-14 rounded transition-colors hover:bg-rouge-fonce w-full sm:w-auto justify-center"
+        >
+          Envoyer ma candidature
+          <span aria-hidden="true">→</span>
+        </button>
+      </form>
+    </div>
+  </Section>
+
+</Layout>

@@ -1,0 +1,51 @@
+---
+import type { Project } from '../data/site';
+
+interface Props {
+  project: Project;
+  cover?: string;
+  aspect?: 'square' | 'portrait' | 'landscape' | 'wide';
+}
+
+const { project, cover, aspect = 'landscape' } = Astro.props;
+
+const aspectClass = {
+  square:    'aspect-square',
+  portrait:  'aspect-[4/5]',
+  landscape: 'aspect-[4/3]',
+  wide:      'aspect-[16/10]',
+}[aspect];
+
+const labelByCategory: Record<string, string> = {
+  'gros-oeuvre':         'Gros œuvre',
+  'entreprise-generale': 'Entreprise générale',
+  'rehabilitation':      'Réhabilitation',
+};
+---
+<a href={`/realisations/${project.slug}`} class={`block group relative overflow-hidden rounded-md bg-anthracite ${aspectClass}`}>
+  <img
+    src={cover ?? '/img/photos/siege-facade-jour.jpg'}
+    alt={`${project.name} — ${project.location}`}
+    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="absolute inset-0 bg-gradient-to-t from-anthracite/90 via-anthracite/30 to-transparent group-hover:from-anthracite/95 transition-opacity"></div>
+  <div class="relative z-10 h-full p-6 lg:p-8 flex flex-col justify-between text-blanc">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="inline-block bg-rouge text-blanc text-[10px] font-label uppercase tracking-[0.15em] font-semibold px-2 py-1 rounded">
+        {labelByCategory[project.category]}
+      </span>
+      <span class="text-[11px] font-label uppercase tracking-[0.15em] text-blanc/70">{project.year}</span>
+    </div>
+    <div>
+      <h3 class="font-display font-extrabold text-h4 lg:text-h3 leading-[1.05] mb-2 text-blanc">
+        {project.name}
+      </h3>
+      <p class="text-sm text-blanc/80">{project.location}</p>
+      <p class="mt-3 text-[11px] text-blanc/60 font-label uppercase tracking-[0.15em] opacity-0 group-hover:opacity-100 transition-opacity">
+        {project.moa}
+      </p>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,151 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { projects } from '../../data/site';
+
+const covers: Record<string, string> = {
+  'les-deux-rives':         '/img/photos/siege-facade-jour.jpg',
+  'quartier-renaissance':   '/img/photos/siege-facade-nuit.jpg',
+  'natureo':                '/img/photos/siege-interieur-03.jpg',
+  'ile-aux-jardins':        '/img/photos/siege-entree.jpg',
+  'carre-emeraude':         '/img/photos/siege-escalier.jpg',
+  'green-park':             '/img/photos/siege-interieur-04.jpg',
+  'residence-avenue':       '/img/photos/siege-facade-jour.jpg',
+  'le-paradiso':            '/img/photos/siege-interieur-03.jpg',
+  'le-schulmeister':        '/img/photos/siege-interieur-04.jpg',
+  'villas-saint-thomas':    '/img/photos/siege-entree.jpg',
+  'oree-des-sens':          '/img/photos/siege-escalier.jpg',
+};
+
+const filters = [
+  { id: 'all',                label: 'Toutes',               count: projects.length },
+  { id: 'gros-oeuvre',        label: 'Gros œuvre',           count: projects.filter(p => p.category === 'gros-oeuvre').length },
+  { id: 'entreprise-generale',label: 'Entreprise générale',  count: projects.filter(p => p.category === 'entreprise-generale').length },
+  { id: 'rehabilitation',     label: 'Réhabilitation',       count: projects.filter(p => p.category === 'rehabilitation').length },
+];
+---
+
+<Layout title="Réalisations" description="Toutes nos réalisations en Alsace : logements collectifs, écoquartiers, réhabilitations, équipements publics. Filtrez par type de mission.">
+
+  <PageHero
+    eyebrow="03 — Réalisations"
+    title="L'empreinte du métier,"
+    titleHighlight="partout en Alsace."
+    subtitle={`${projects.length} chantiers référencés. Chaque réalisation porte la signature SOCARA : rigoureuse, collective, soignée, livrée dans le respect des engagements.`}
+    image="/img/photos/siege-facade-jour.jpg"
+    variant="dark"
+  />
+
+  <Section background="blanc" paddingY="md">
+    <!-- Filtres -->
+    <div class="flex flex-wrap items-center gap-2 mb-12 lg:mb-16" data-reveal>
+      <span class="font-label uppercase text-[12px] tracking-[0.18em] text-gris-chaud mr-2">Filtrer&nbsp;:</span>
+      {filters.map((f, i) => (
+        <button
+          type="button"
+          data-filter={f.id}
+          class:list={[
+            'inline-flex items-center gap-2 px-5 h-11 rounded font-label uppercase text-[12px] font-semibold tracking-[0.15em] border transition-colors',
+            i === 0 ? 'bg-anthracite text-blanc border-anthracite' : 'bg-blanc text-anthracite border-anthracite/20 hover:border-anthracite',
+          ]}
+        >
+          <span>{f.label}</span>
+          <span class="text-[10px] opacity-60 tabular-nums">{f.count}</span>
+        </button>
+      ))}
+    </div>
+
+    <!-- Grille projets -->
+    <ul id="projects-grid" class="grid grid-cols-12 gap-4 lg:gap-6">
+      {projects.map((p, i) => {
+        const spans = [
+          'col-span-12 md:col-span-8 lg:col-span-8',
+          'col-span-12 md:col-span-4 lg:col-span-4',
+          'col-span-6 md:col-span-4 lg:col-span-4',
+          'col-span-6 md:col-span-4 lg:col-span-4',
+          'col-span-12 md:col-span-4 lg:col-span-4',
+          'col-span-6 md:col-span-6 lg:col-span-6',
+          'col-span-6 md:col-span-6 lg:col-span-6',
+          'col-span-12 md:col-span-4 lg:col-span-4',
+          'col-span-12 md:col-span-8 lg:col-span-8',
+          'col-span-6 md:col-span-6 lg:col-span-6',
+          'col-span-6 md:col-span-6 lg:col-span-6',
+        ];
+        const aspects = ['wide', 'portrait', 'square', 'portrait', 'landscape', 'landscape', 'landscape', 'square', 'wide', 'landscape', 'landscape'] as const;
+        return (
+          <li class={spans[i % spans.length]} data-project-category={p.category} data-reveal data-reveal-delay={(i % 6) * 60}>
+            <ProjectCard project={p} cover={covers[p.slug]} aspect={aspects[i % aspects.length]} />
+          </li>
+        );
+      })}
+    </ul>
+  </Section>
+
+  <!-- Carte placeholder -->
+  <Section background="ivoire" paddingY="lg" id="carte">
+    <div class="grid-12 mb-12">
+      <div class="col-span-12 lg:col-span-7">
+        <p class="section-marker text-rouge mb-8" data-reveal>
+          <span>Carte interactive</span>
+        </p>
+        <h2 class="text-h2 font-display font-extrabold text-anthracite mb-6" data-reveal data-reveal-delay="100">
+          Nos chantiers, géolocalisés en Alsace.
+        </h2>
+        <p class="text-lede text-anthracite/75 max-w-2xl" data-reveal data-reveal-delay="200">
+          Strasbourg, Robertsau, Lingolsheim, Hœnheim, Oberhausbergen, Souffelweyersheim, Niederhausbergen — l'Alsace est notre terrain de jeu.
+        </p>
+      </div>
+    </div>
+    <div class="aspect-[16/9] rounded-md bg-anthracite/5 border border-anthracite/15 grid place-items-center" data-reveal>
+      <div class="text-center max-w-md p-8">
+        <p class="font-display font-extrabold text-anthracite text-h4 mb-3">Carte à venir</p>
+        <p class="text-anthracite/65">
+          Carte interactive Leaflet/MapLibre — chargement asynchrone, filtres par catégorie et année.
+          <br />
+          <span class="text-sm opacity-60">À intégrer dans une prochaine itération.</span>
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <script>
+    document.addEventListener('astro:page-load', initFilters);
+    initFilters();
+
+    function initFilters() {
+      const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+      const items = document.querySelectorAll<HTMLLIElement>('[data-project-category]');
+      if (!buttons.length) return;
+
+      // Read filter from URL on load
+      const params = new URLSearchParams(window.location.search);
+      const filter = params.get('filtre');
+      if (filter) {
+        const btn = Array.from(buttons).find((b) => b.dataset.filter === filter);
+        if (btn) btn.click();
+      }
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const id = btn.dataset.filter ?? 'all';
+          buttons.forEach((b) => {
+            const active = b === btn;
+            b.classList.toggle('bg-anthracite', active);
+            b.classList.toggle('text-blanc', active);
+            b.classList.toggle('border-anthracite', active);
+            b.classList.toggle('bg-blanc', !active);
+            b.classList.toggle('text-anthracite', !active);
+            b.classList.toggle('border-anthracite/20', !active);
+          });
+          items.forEach((li) => {
+            const cat = li.dataset.projectCategory;
+            li.style.display = id === 'all' || cat === id ? '' : 'none';
+          });
+        });
+      });
+    }
+  </script>
+
+</Layout>

@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import { company } from '../data/site';
+---
+
+<Layout title="Mentions légales" description={`Mentions légales du site ${company.name}.`}>
+  <PageHero eyebrow="Légal" title="Mentions légales" variant="light" />
+
+  <Section background="blanc" paddingY="lg">
+    <div class="max-w-2xl mx-auto space-y-10 text-anthracite/85">
+
+      <div>
+        <h2 class="font-display font-extrabold text-h4 text-anthracite mb-3">Éditeur du site</h2>
+        <p>{company.name}<br />
+        Siège social : {company.address}<br />
+        Email : <a href={`mailto:${company.email}`} class="underline">{company.email}</a></p>
+        <p class="mt-2 text-sm text-gris-chaud italic">
+          [À compléter par le client : SIRET, RCS, capital social, forme juridique, n° TVA intracommunautaire,
+          directeur de la publication]
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display font-extrabold text-h4 text-anthracite mb-3">Hébergement</h2>
+        <p class="text-sm text-gris-chaud italic">
+          [À compléter par le client : nom de l'hébergeur, adresse, téléphone — typiquement Vercel, Netlify, OVH…]
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display font-extrabold text-h4 text-anthracite mb-3">Propriété intellectuelle</h2>
+        <p>
+          L'ensemble des contenus du site (textes, images, vidéos, logo, charte graphique) est la propriété
+          exclusive de {company.name} ou de ses partenaires. Toute reproduction, même partielle, est interdite
+          sans autorisation préalable.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display font-extrabold text-h4 text-anthracite mb-3">Crédits photo</h2>
+        <p>
+          Photographies du siège : AEA Architectes / Nis&For.<br />
+          Photographies de chantiers et archives : SOCARA.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-display font-extrabold text-h4 text-anthracite mb-3">Données personnelles</h2>
+        <p>
+          Voir notre <a href="/confidentialite" class="underline text-rouge">politique de confidentialité</a>.
+        </p>
+      </div>
+    </div>
+  </Section>
+</Layout>
